@@ -354,7 +354,7 @@ export default function LecturerLayout() {
                 <WrapItem>
                   <Avatar
                     name={`${lecturer?.firstname} ${lecturer?.lastname}`}
-                    src={`https://rosy-group-premium-plant-production.pipeops.app/${lecturer?.pic}`}
+                    src={`https://yoursams.pipeops.app/${lecturer?.pic}`}
                   />
                 </WrapItem>
               </Wrap>

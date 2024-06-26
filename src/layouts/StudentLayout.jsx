@@ -250,7 +250,7 @@ export default function StudentLayout() {
                 <WrapItem>
                   <Avatar
                     name={`${student?.firstname} ${student?.lastname}`}
-                    src={`https://rosy-group-premium-plant-production.pipeops.app/${student?.pic}`}
+                    src={`https://yoursams.pipeops.app/${student?.pic}`}
                   />
                 </WrapItem>
               </Wrap>
