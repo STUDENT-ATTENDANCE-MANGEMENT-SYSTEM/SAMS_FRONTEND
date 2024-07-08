@@ -10,6 +10,12 @@ const fonts = {
   heading: "Prompt",
   mono: "Lato",
   solo: "Roboto",
+  one: "Poppins",
+  two: "Montserrat",
+  three: "Open Sans",
+  four: "Lora",
+  five: "Merriweather",
+  
 };
 const theme = extendTheme({ fonts });
 

@@ -22,6 +22,8 @@ import {
   FormLabel,
   Input,
   useDisclosure,
+  Flex,
+  Box,
 } from "@chakra-ui/react";
 import { Icon } from "@chakra-ui/icons";
 import { useParams, useNavigate } from "react-router-dom";
@@ -32,9 +34,36 @@ import { useUpdateAttendanceMutation } from "../../features/attendance/lecturerA
 import { useDeleteAttendanceMutation } from "../../features/attendance/lecturerAttendanceApiSlice";
 
 export default function AttendanceInfo() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(getItemsPerPage());
+
+  function getItemsPerPage() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 768) { // Example breakpoint for mobile devices
+      return 12;
+    } else if (screenWidth < 1024) { // Example breakpoint for tablets
+      return 8;
+    } else {
+      return 8; // Default value for desktop
+    }
+  }
+
+  useEffect(() => {
+    function handleResize() {
+      setItemsPerPage(getItemsPerPage());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   const [updateAttendance, { isLoading, isSuccess }] =
     useUpdateAttendanceMutation();
-  const [deleteAttendance,{isSuccess: isDelSuccess}] = useDeleteAttendanceMutation();
+  const [deleteAttendance, { isSuccess: isDelSuccess }] =
+    useDeleteAttendanceMutation();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [name, setName] = useState("");
@@ -42,7 +71,6 @@ export default function AttendanceInfo() {
   const [department, setDepartment] = useState("");
   const [attendance, setAttendance] = useState(null);
   const { lecturerId, id } = useParams();
-  const [hasNavigated, setHasNavigated] = useState(false);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const fetchAttendanceById = async (id) => {
@@ -87,6 +115,12 @@ export default function AttendanceInfo() {
     );
   }
 
+  const currentItems = attendance.students
+    .sort((a, b) => a.department.localeCompare(b.department))
+    .slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(attendance.students.length / itemsPerPage);
+
   const handleDelete = async (student_id) => {
     try {
       await deleteAttendance({ attendanceId: id, studentId: student_id });
@@ -95,7 +129,6 @@ export default function AttendanceInfo() {
     }
   };
 
-  
   const handleSubmit = async () => {
     try {
       await updateAttendance({
@@ -112,10 +145,8 @@ export default function AttendanceInfo() {
     }
   };
 
-  
-
   return (
-    <div>
+    <div style={{ minHeight: "100vh", position: "relative" }}>
       <TableContainer>
         <Table variant="striped" colorScheme="grey">
           <Thead>
@@ -123,11 +154,11 @@ export default function AttendanceInfo() {
               <Th>Name</Th>
               <Th>Matric Number</Th>
               <Th>Department</Th>
-              <Th>Action</Th>
+              <Th>Delete</Th>
             </Tr>
           </Thead>
           <Tbody textAlign={"center"}>
-            {attendance.students.map((student) => (
+            {currentItems.map((student) => (
               <Tr key={student._id}>
                 <Td>{student.name}</Td>
                 <Td>{student.matricNumber}</Td>
@@ -146,8 +177,49 @@ export default function AttendanceInfo() {
           </Tbody>
         </Table>
       </TableContainer>
-      <Button colorScheme="green" m="1rem" onClick={onOpen}>
-        <Icon as={MdEdit}  />
+
+      <Flex
+        m={4}
+        pos={"absolute"}
+        bottom={"0px"}
+        right={"0px"}
+        flexDir={"row"}
+        justify={"flex-end"}
+        align={"center"}
+        width="100%" // Ensure it spans the full width if needed
+        maxWidth={{ base: "400px", lg: "1080px" }} // Adjust based on your layout's max width
+        left="50%"
+        transform="translateX(-50%)"
+      >
+        <Button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+          colorScheme="red"
+          m="0 5px"
+        >
+          Previous
+        </Button>
+        <Box>
+          Page {currentPage} of {totalPages}
+        </Box>
+        <Button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          colorScheme="red"
+          m="0 5px"
+        >
+          Next
+        </Button>
+      </Flex>
+
+      <Button
+        colorScheme="green"
+        m="1rem"
+        onClick={onOpen}
+        pos={"absolute"}
+        bottom={"0"}
+      >
+        <Icon as={MdEdit} />
         Add
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -168,7 +240,7 @@ export default function AttendanceInfo() {
               </FormControl>
 
               <FormControl mt={4} isRequired>
-                <FormLabel>MatricNumber Number</FormLabel>
+                <FormLabel>Matric Number</FormLabel>
                 <Input
                   value={matricNumber}
                   placeholder="e.g 00000"

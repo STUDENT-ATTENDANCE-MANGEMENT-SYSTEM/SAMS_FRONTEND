@@ -27,7 +27,7 @@ import { FaUser } from "react-icons/fa";
 import { CloseIcon, EmailIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
 import { useSignupMutation } from "../../features/studentAuth/studentAuthApiSlice";
-
+import '@fontsource/poppins/300.css'
 import logo from "../../images/logo-revamp.svg";
 
 import { useEffect, useState } from "react";
@@ -145,7 +145,7 @@ export default function Student() {
         toast({
           position:'top-right',
           title: "Auuchh!",
-          description: errMsg,
+          description: 'Email already exists',
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -238,9 +238,9 @@ export default function Student() {
         </Flex>
 
         <Heading
-          fontFamily={"mono"}
+          fontFamily={"body"}
           color={"#213655"}
-          fontSize={{ base: "1.9em", md: "1.7em", lg: "3em", xl: "3em" }}
+          fontSize={{ base: "1.5em", md: "1.5em", lg: "2.5em", xl: "2.5em" }}
           textAlign={"center"}
           mb={"1.4em"}
         >
@@ -381,6 +381,12 @@ export default function Student() {
                   placeholder="Type Institution name"
                   border={"1px solid gray"}
                   autoComplete="off"
+                  style={{
+                    maxWidth: '100%', 
+                    overflow: 'hidden', 
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap' 
+                  }}
                 />
                 <Box
                   pos={"absolute"}
@@ -457,6 +463,7 @@ export default function Student() {
             <Text
               pr={".4em"}
               fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
+              fontFamily={"one"}
             >
               Already have an account?
             </Text>
@@ -465,6 +472,7 @@ export default function Student() {
               textAlign={"center"}
               color={"red"}
               fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
+              fontFamily={"one"}
             >
               Login
             </Link>

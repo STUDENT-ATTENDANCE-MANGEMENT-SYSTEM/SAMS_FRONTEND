@@ -59,6 +59,7 @@ export default function AttendanceList() {
         <div>
           <SimpleGrid
             columns={{ base: "1", lg: "3", xl: "3" }}
+            mb={"2rem"}
             mx={"20px"}
             gap={"10"}
             mt={"30px"}

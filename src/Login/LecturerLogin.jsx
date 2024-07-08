@@ -109,7 +109,7 @@ export default function LecturerLogin() {
         toast({
           position: 'top',
           title: "Auuchh!",
-          description: errMsg,
+          description: 'Invalid Email or Password',
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -143,7 +143,7 @@ export default function LecturerLogin() {
   };
 
   const signin = () => {
-    navigate("/signin/student");
+    navigate("/signin/lecturer");
   };
   return (
     <div>
@@ -263,27 +263,33 @@ export default function LecturerLogin() {
               </Flex>
             )}
 
-            <Checkbox isChecked={persist} onChange={handleToggle}>
-              Remember me
-            </Checkbox>
-          </Form>
-
+            
+            
+            
           <Flex mb={"2em"} mx={"1.5em"}>
+          <Checkbox isChecked={persist} onChange={handleToggle} flex={'1'}>
+            <Text fontSize={{ base: ".7rem", lg: ".9rem", xl: ".9rem" }}> Remember me</Text>
+              
+            </Checkbox>
             <Text
               pr={".4em"}
-              fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
+              fontSize={{ base: ".7rem", lg: ".9rem", xl: ".9rem" }}
+              fontFamily={'body'}
             >
               Don't have an account?
             </Text>
-            <Link
+            <Text
               onClick={signin}
               textAlign={"center"}
               color={"red"}
               fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
+              fontFamily={'body'}
             >
-              signin
-            </Link>
+              Signin
+            </Text>
           </Flex>
+          </Form>
+
         </Flex>
       </Flex>
 

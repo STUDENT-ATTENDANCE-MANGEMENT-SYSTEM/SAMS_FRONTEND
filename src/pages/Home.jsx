@@ -255,7 +255,7 @@ export const Home = () => {
           viewport={{
             once: true,
           }}
-          my={{ base: "3.5rem", md: "5rem", lg: "8.75rem", xl: "11rem" }}
+          mt={{ base: "5.5rem", md: "6rem", lg: "5.75rem", xl: "0rem" }}
           px={{ base: "1.25rem", lg: "1.875rem", xl: "1.875rem" }}
         >
           <Heading

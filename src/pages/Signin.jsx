@@ -7,11 +7,13 @@ import {
   Flex,
   Heading,
   Spacer,
+  Text,
 } from "@chakra-ui/react";
 import student from "../images/student.png";
 import lecturer from "../images/tutor.png";
 import { NavLink, Outlet } from "react-router-dom";
 import { useEffect } from "react";
+import "@fontsource/merriweather/400.css";
 
 export default function Signin() {
   useEffect(() => {
@@ -20,15 +22,16 @@ export default function Signin() {
 
   return (
     <div>
-      <Heading
+      <Text
         textAlign={"center"}
         my={"2em"}
         fontSize={{ base: "1.6rem", md: "1.8rem", lg: "2.3rem", xl: "2.4rem" }}
+        fontFamily={"body"}
         color={"#213655"}
         px={".7em"}
       >
         Register based on your role
-      </Heading>
+      </Text>
       <Flex
         justify={"center"}
         flexDir={{ base: "column", lg: "row", xl: "row" }}
@@ -43,13 +46,14 @@ export default function Signin() {
             >
               <img src={student} alt="student" />
             </Box>
-            <Button
+            <Text
               variant={"ghost"}
               color={"#213655"}
               fontSize={{ base: "1rem", md: "1.2rem", lg: "2rem", xl: "2rem" }}
+              fontFamily={"body"}
             >
               STUDENT
-            </Button>
+            </Text>
           </Flex>
         </NavLink>
 
@@ -61,13 +65,14 @@ export default function Signin() {
             >
               <img src={lecturer} alt="student" />
             </Box>
-            <Button
+            <Text
               variant={"ghost"}
               fontSize={{ base: "1rem", md: "1.2rem", lg: "2rem", xl: "2rem" }}
               color={"#213655"}
+              fontFamily={"body"}
             >
               LECTURER
-            </Button>
+            </Text>
           </Flex>
         </NavLink>
       </Flex>

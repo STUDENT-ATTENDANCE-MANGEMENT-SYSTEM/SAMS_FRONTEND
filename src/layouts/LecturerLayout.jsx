@@ -41,12 +41,13 @@ import {
   MdAnalytics,
   MdBook,
   MdContactSupport,
+  MdGridOn,
   MdHome,
   MdSettings,
 } from "react-icons/md";
 import Hamburger from "hamburger-react";
 import { useEffect, useRef, useState } from "react";
-import logo from "../images/logo.png";
+import logo from "../images/logo-revamp.svg";
 import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 import { useSendLogoutMutation } from "../features/lecturerAuth/lecturerAuthApiSlice";
 import { useGetLecturerByIdQuery } from "../features/lecturerAuth/lecturerAuthApiSlice";
@@ -222,8 +223,8 @@ export default function LecturerLayout() {
                   </ListItem>
                 </Link>       
                   <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
-                      <ListIcon as={MdBook} boxSize={5} />
-                          Course
+                      <ListIcon as={MdGridOn} boxSize={5} />
+                          Timetable
                   </ListItem>
                   <ListItem fontWeight={"bold"} cursor={"pointer"}  pl={2}>
                     <ListIcon as={MdAnalytics} boxSize={5} />
@@ -254,9 +255,10 @@ export default function LecturerLayout() {
         <Box
           display={display}
           pos={"fixed"}
-          zIndex={1000}
+          zIndex={10}
           bgColor={"white"}
           w={"250px"}
+          mt={"70px"}
         >
           <GridItem
             as={"aside"}
@@ -264,11 +266,7 @@ export default function LecturerLayout() {
             minHeight={"100vh"}
             borderRight={"2px solid black"}
           >
-            <Flex mt={"60px"} ml={"10px"}>
-              <Text fontWeight={"extrabold"} fontSize={"2xl"}>
-                Hello! {lecturer?.firstname}
-              </Text>
-            </Flex>
+            
             <Flex justify={"center"}>
               <List spacing={10} mt={"70px"} cursor={"pointer"}>
                 <Link to={"/"}>
@@ -279,8 +277,8 @@ export default function LecturerLayout() {
                 </Link>
               
                   <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
-                      <ListIcon as={MdBook} boxSize={5} />
-                          Courses
+                      <ListIcon as={MdGridOn} boxSize={5} />
+                          Timetable
                         </ListItem>
                
                         <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
@@ -307,11 +305,11 @@ export default function LecturerLayout() {
           </GridItem>
         </Box>
         <GridItem as={"main"} colSpan={{ base: "6", lg: "5", xl: "5" }}>
-          <Flex borderBottom={"1px solid grey"} p={"10px"} align={"center"}>
+          <Flex borderBottom={"1px solid grey"} p={"10px"} align={"center"} backgroundColor={'white'} pos={{base:"fixed", lg:'relative',xl:'relative'}} zIndex={5} width="100%" >
             <Box
               display={{ base: "flex", md: "flex", lg: "none", xl: "none" }}
               //mr={{ base: "10px" }}
-              zIndex={2000}
+              
             >
               <Hamburger
                 rounded
@@ -324,9 +322,10 @@ export default function LecturerLayout() {
                     setDisplay("none");
                   }
                 }}
+                size={20}
               />
             </Box>
-            <Box ml={{ base: "10px", lg: "25px", xl: "25px" }}>
+            <Box ml={{ base: "5px", lg: "25px", xl: "25px" }} w={{base:'10%', xl:'5%'}}>
               <img src={logo} alt="logo" />
             </Box>
             <Spacer />

@@ -88,7 +88,7 @@ export default function StudentLogin() {
         setPassword("");
         navigate(`/student/${id}`);
         toast({
-          position:'top-right',
+          position: "top-right",
           title: "Goodie!",
           description: "You have successfully logged in",
           status: "success",
@@ -111,7 +111,7 @@ export default function StudentLogin() {
         toast({
           position: "top",
           title: "Auuchh!",
-          description: errMsg,
+          description: 'Invalid Email or Password',
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -265,27 +265,31 @@ export default function StudentLogin() {
               </Flex>
             )}
 
-            <Checkbox isChecked={persist} onChange={handleToggle}>
-              Remember me
-            </Checkbox>
+            <Flex mb={"2em"} mx={"1.5em"}>
+              <Checkbox isChecked={persist} onChange={handleToggle} flex={"1"}>
+                <Text fontSize={{ base: ".7rem", lg: ".9rem", xl: ".9rem" }}>
+                  {" "}
+                  Remember me
+                </Text>
+              </Checkbox>
+              <Text
+                pr={".4em"}
+                fontSize={{ base: ".7rem", lg: ".9rem", xl: ".9rem" }}
+                fontFamily={"body"}
+              >
+                Don't have an account?
+              </Text>
+              <Text
+                onClick={signin}
+                textAlign={"center"}
+                color={"red"}
+                fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
+                fontFamily={"body"}
+              >
+                Signin
+              </Text>
+            </Flex>
           </Form>
-
-          <Flex mb={"2em"} mx={"1.5em"}>
-            <Text
-              pr={".4em"}
-              fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
-            >
-              Don't have an account?
-            </Text>
-            <Link
-              onClick={signin}
-              textAlign={"center"}
-              color={"red"}
-              fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
-            >
-              signin
-            </Link>
-          </Flex>
         </Flex>
       </Flex>
 

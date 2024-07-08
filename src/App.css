@@ -1,5 +1,5 @@
 .bg-color {
-  background-color: hsl(32, 45%, 94%);
+  background-color: #fff;
 }
 ::-webkit-scrollbar {
   display: none;
@@ -7,3 +7,4 @@
 #root {
   overflow: hidden;
 }
+/*hsl(32, 45%, 94%)

@@ -32,7 +32,7 @@ import { useSignupMutation } from "../../features/lecturerAuth/lecturerAuthApiSl
 import logo from "../../images/logo-revamp.svg";
 
 import { useEffect, useState } from "react";
-
+import '@fontsource/poppins/300.css'
 import { Form, Outlet, useNavigate, useParams } from "react-router-dom";
 import { color } from "framer-motion";
 import { setCredentials } from "../../features/lecturerAuth/lecturerAuthSlice";
@@ -152,7 +152,7 @@ const handleTitleChange = (e) => setTitle(e.target.value);
 
         toast({
           title: "Auuchh!",
-          description: errMsg,
+          description: 'Email already exists',
           status: "error",
           duration: 9000,
           isClosable: true,
@@ -244,15 +244,15 @@ const handleTitleChange = (e) => setTitle(e.target.value);
           </Box>
         </Flex>
 
-        <Heading
-          fontFamily={"mono"}
+        <Text
+          fontFamily={"body"}
           color={"#213655"}
-          fontSize={{ base: "1.9em", md: "1.7em", lg: "3em", xl: "3em" }}
+          fontSize={{ base: "1.5em", md: "1.5em", lg: "2.5m", xl: "2.5em" }}
           textAlign={"center"}
-          mb={"1.4em"}
+          mb={{base:'1.5em',xl:".7em"}}
         >
           Sign up as a lecturer
-        </Heading>
+        </Text>
 
         <Flex flexDir="column">
           <Form
@@ -366,6 +366,7 @@ const handleTitleChange = (e) => setTitle(e.target.value);
                   outline={"none"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  
                 />
               </InputGroup>
               {isSubmitted && (
@@ -374,7 +375,7 @@ const handleTitleChange = (e) => setTitle(e.target.value);
             </FormControl>
             <FormControl mb={"2rem"} w={"90%"} ml={"auto"} mr={"auto"}>
         <Select placeholder="Select title" value={title} onChange={handleTitleChange}
-        border={'1px solid grey'}
+        border={'1px solid grey'} color={'grey'}
         >
           <option value="mr.">Mr.</option>
           <option value="mrs.">Mrs.</option>
@@ -399,6 +400,12 @@ const handleTitleChange = (e) => setTitle(e.target.value);
                   placeholder="Type Institution name"
                   border={"1px solid gray"}
                   autoComplete="off"
+                  style={{
+                    maxWidth: '100%', 
+                    overflow: 'hidden', 
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap' 
+                  }}
                 />
                 <Box
                   pos={"absolute"}
@@ -407,6 +414,7 @@ const handleTitleChange = (e) => setTitle(e.target.value);
                   transform={"translateY(-50%)"}
                   variant={"ghost"}
                   onClick={() => setInstitution("")}
+                
                 >
                   <CloseIcon />
                 </Box>
@@ -475,17 +483,19 @@ const handleTitleChange = (e) => setTitle(e.target.value);
             <Text
               pr={".4em"}
               fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
+              fontFamily={"one"}
             >
               Already have an account?
             </Text>
-            <Link
+            <Text
               onClick={login}
               textAlign={"center"}
               color={"red"}
               fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
+              fontFamily={"one"}
             >
               Login
-            </Link>
+            </Text>
           </Flex>
         </Flex>
       </Flex>

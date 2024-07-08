@@ -1,6 +1,6 @@
 import { Box, Button, Flex, Spacer } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import logo from "../images/logo.png";
+import logo from "../images/logo_2.png";
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Divide as Hamburger } from "hamburger-react";
@@ -34,7 +34,7 @@ export default function Navbar() {
 
   const [display, setDisplay] = useState(DISPLAY_NONE);
   const [toggled, setToggled] = useState(false);
-  const [background, setBackground] = useState("hsl(32, 45%, 94%)");
+  const [background, setBackground] = useState("#fff");
   const [shadow, setShadow] = useState("");
   const changeBg = (e) => {
     var scrollValue = window.scrollY;
@@ -42,7 +42,7 @@ export default function Navbar() {
       setBackground("white");
       setShadow("0px 2px 10px 0px rgba(158,161,161,1)");
     } else {
-      setBackground("hsl(32, 45%, 94%)");
+      setBackground("white");
       setShadow("");
     }
   };
@@ -81,7 +81,7 @@ export default function Navbar() {
       >
         <Box
           mx={{ base: "3%", md: "3%", lg: "5%", xl: "5%" }}
-          w={"100%"}
+          w={{base:"25%",xl:"100%"}}
           mt={"10px"}
           pl={"1rem"}
         >
@@ -147,6 +147,10 @@ export default function Navbar() {
         <Box
           display={{ base: "flex", md: "flex", lg: "none", xl: "none" }}
           mr={"1rem"}
+          mt={
+            '-10px'
+          }
+          //w={'10%'}
         >
           <Hamburger
             rounded
@@ -154,6 +158,7 @@ export default function Navbar() {
             duration={0.5}
             toggled={toggled}
             toggle={setToggled}
+            size={20}
           />
         </Box>
 
