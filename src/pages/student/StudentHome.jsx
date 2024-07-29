@@ -54,9 +54,9 @@ export default function StudentHome() {
 
   useEffect(() => {
     if (!isLoading && (!attendanceTabs || attendanceTabs.ids.length === 0)) {
-      navigate(`/student/${studentId}/new`);
+      navigate(`/student/${id}/new`);
     }
-  }, [isLoading, attendanceTabs, navigate, studentId]);
+  }, [isLoading, attendanceTabs, navigate]);
 
   useEffect(() => {
     document.body.classList.add("bg-color");
@@ -81,9 +81,12 @@ export default function StudentHome() {
         <div>
           <SimpleGrid
             columns={{ base: "1", lg: "3", xl: "3" }}
+            mb={"2rem"}
             mx={"20px"}
-            gap={"10"}
             mt={"30px"}
+            overflow={"hidden"}
+            pos={"relative"}
+            gap={3}
           >
             {attendanceTabs &&
               attendanceTabs.ids.map((id, index) => {
@@ -92,21 +95,21 @@ export default function StudentHome() {
                 return (
                   <div key={index}>
                     <Card
-                      variant={"elevated"}
-                      backgroundColor={course.Open ? "white" : "#D3D3D3"}
+                      variant={"outline"} mt={{base:'5em', lg:'0', xl:'0'}} boxShadow={'lg'}
+                      backgroundColor={course.Open ? "white" : "#F5F5F5"}
                       onClick={course.Open ? () => handleSubmit(course) : undefined}
                       //h={'full'}
-                      mb={5}
+                  
                     >
                       <CardHeader>
                         <Flex>
-                          <Heading fontSize={"2rem"} pl={"10px"} mt={"15px"}>
+                          <Heading fontSize={{base:"1.5rem",md:"2rem",lg:"2rem",xl:"2rem"}} pl={"10px"} mt={"15px"}>
                             {course.courseCode}
                           </Heading>
                           <Spacer />
                         </Flex>
                       </CardHeader>
-                      <CardBody fontSize={"1.3rem"}>
+                      <CardBody fontSize={{base:"1rem",md:"1.2rem",lg:"1.2rem",xl:"1.2rem"}}>
                         {course.courseName}
                       </CardBody>
                       <Divider />

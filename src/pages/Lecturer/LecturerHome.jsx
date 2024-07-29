@@ -194,7 +194,7 @@ const handleNextPage = () => {
 
                 return (
                   <div key={index}>
-                    <Card variant={"outline"} mt={{base:'5em', lg:'0', xl:'0'}} boxShadow={'lg'} >
+                    <Card variant={"outline"} mt={'5em'} boxShadow={'lg'} >
                       <CardHeader>
                         <Flex>
                           <Heading fontSize={{base:"1.5rem",md:"2rem",lg:"2rem",xl:"2rem"}} pl={"10px"} mt={"15px"}>

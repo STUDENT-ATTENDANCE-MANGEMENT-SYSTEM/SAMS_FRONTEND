@@ -473,6 +473,7 @@ export default function Student() {
               color={"red"}
               fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
               fontFamily={"one"}
+              cursor={'pointer'}
             >
               Login
             </Link>

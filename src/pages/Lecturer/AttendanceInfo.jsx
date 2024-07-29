@@ -24,6 +24,7 @@ import {
   useDisclosure,
   Flex,
   Box,
+  Show,
 } from "@chakra-ui/react";
 import { Icon } from "@chakra-ui/icons";
 import { useParams, useNavigate } from "react-router-dom";
@@ -148,7 +149,7 @@ export default function AttendanceInfo() {
   return (
     <div style={{ minHeight: "100vh", position: "relative" }}>
       <TableContainer>
-        <Table variant="striped" colorScheme="grey">
+        <Table variant="striped" colorScheme="grey" mt={'5em'}  size={{base:'sm', md:'md', lg:'lg', xl:'xl'}}>
           <Thead>
             <Tr>
               <Th>Name</Th>
@@ -177,7 +178,7 @@ export default function AttendanceInfo() {
           </Tbody>
         </Table>
       </TableContainer>
-
+      <Show above="md" >
       <Flex
         m={4}
         pos={"absolute"}
@@ -211,13 +212,14 @@ export default function AttendanceInfo() {
           Next
         </Button>
       </Flex>
-
+      </Show>
       <Button
         colorScheme="green"
         m="1rem"
         onClick={onOpen}
         pos={"absolute"}
         bottom={"0"}
+        zIndex={100}
       >
         <Icon as={MdEdit} />
         Add

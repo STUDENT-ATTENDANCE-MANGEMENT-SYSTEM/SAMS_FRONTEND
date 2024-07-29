@@ -35,25 +35,27 @@ import {
   Input,
 } from "@chakra-ui/react";
 import Hamburger from "hamburger-react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import {
   MdAnalytics,
   MdBook,
   MdContactSupport,
+  MdGridOn,
   MdHome,
   MdSettings,
 } from "react-icons/md";
 import { useEffect, useState, useContext } from "react";
-import logo from "../images/logo.png";
+import logo from "../images/logo-revamp.svg";
 import { useSendLogoutMutation } from "../features/studentAuth/studentAuthApiSlice";
 import { useUpdateAttendanceTabMutation } from "../features/attendanceTab/studentAttendanceTabApiSlice";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { AddIcon, BellIcon, SearchIcon } from "@chakra-ui/icons";
 import axios from "axios";
 export default function StudentLayout() {
   const [updateAttendanceTab, {isLoading:isLoadingAttendanceTab, isSuccess:isSuccessAttendanceTab}] = useUpdateAttendanceTabMutation();
   const [attendanceCode, setAttendanceCode] = useState("");
   const { id } = useParams();
+  const location = useLocation()
   const navigate = useNavigate();
   const [student, setStudent] = useState(null);
   const { isOpen: isOpen, onOpen: onOpen, onClose: onClose } = useDisclosure();
@@ -102,6 +104,16 @@ export default function StudentLayout() {
   }, []);
   const [display, setDisplay] = useState("none");
 
+  const timeTable = () =>{
+    navigate(`/student/${id}/timetable`)
+    setDisplay("none")
+  }
+
+  const home = () =>{
+    navigate(`/student/${id}`)
+    setDisplay("none")
+  }
+
   return (
     <div>
       <Grid templateColumns={"repeat(6, 1fr)"}>
@@ -109,7 +121,7 @@ export default function StudentLayout() {
           <GridItem
             as={"aside"}
             colSpan={{ base: "0", lg: "2", xl: "1" }}
-            //minHeight={"100vh"}
+            minHeight={"100vh"}
             borderRight={"2px solid black"}
           >
             <Flex mt={"60px"} ml={"10px"}>
@@ -119,21 +131,20 @@ export default function StudentLayout() {
             </Flex>
             <Flex justify={"center"}>
               <List spacing={10} mt={"70px"} cursor={"pointer"}>
-                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={"20px"}>
+                <ListItem fontWeight={"bold"} cursor={"pointer"} onClick={home} pl={2} color={location.pathname === `/student/${id}` ? "red" : "initial"}>
                   <ListIcon as={MdHome} boxSize={5} />
                   Home
                 </ListItem>
-                
-                        <ListItem fontWeight={"bold"} cursor={"pointer"}>
-                          <ListIcon as={MdBook} boxSize={5} />
-                          Courses
+                        <ListItem fontWeight={"bold"} onClick={timeTable} color={location.pathname === `/student/${id}/timetable` ? "red" : "initial"} cursor={"pointer"} pl={2}>
+                          <ListIcon as={MdGridOn} boxSize={5} />
+                          Time Table
                         </ListItem>
                       
-                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={"20px"}>
+                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
                   <ListIcon as={MdSettings} boxSize={5} />
                   Setting
                 </ListItem>
-                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={"20px"}>
+                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
                   <ListIcon as={MdContactSupport} boxSize={5} />
                   Support and Help
                 </ListItem>
@@ -149,10 +160,10 @@ export default function StudentLayout() {
         <Box
           display={display}
           pos={"fixed"}
-          zIndex={1000}
+          zIndex={10}
           bgColor={"white"}
           w={"250px"}
-          h={"100vh"}
+          mt={"70px"}
         >
           <GridItem
             as={"aside"}
@@ -160,29 +171,26 @@ export default function StudentLayout() {
             minHeight={"100vh"}
             borderRight={"2px solid black"}
           >
-            <Flex mt={"60px"} ml={"10px"}>
-              <Text fontWeight={"extrabold"} fontSize={"2xl"}>
-                Hello! {student?.lastname}
-              </Text>
-            </Flex>
+           
             <Flex justify={"center"}>
               <List spacing={10} mt={"70px"} cursor={"pointer"}>
-                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={"20px"}>
+                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2} onClick={home} color={location.pathname === `/student/${id}` ? "red" : "initial"}>
                   <ListIcon as={MdHome} boxSize={5} />
                   Home
+                  
                 </ListItem>
                 
-                        <ListItem fontWeight={"bold"} cursor={"pointer"}>
-                          <ListIcon as={MdBook} boxSize={5} />
-                          Courses
-                        </ListItem>
-                   
-
-                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={"20px"}>
+                
+                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2} onClick={timeTable} color={location.pathname === `/student/${id}/timetable` ? "red" : "initial"}>
+                    <ListIcon as={MdGridOn} boxSize={5} />
+                          Time Table
+                 </ListItem>
+                
+                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
                   <ListIcon as={MdSettings} boxSize={5} />
                   Setting
                 </ListItem>
-                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={"20px"}>
+                <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
                   <ListIcon as={MdContactSupport} boxSize={5} />
                   Support and Help
                 </ListItem>
@@ -201,7 +209,7 @@ export default function StudentLayout() {
           </GridItem>
         </Box>
         <GridItem as={"main"} colSpan={{ base: "6", lg: "5", xl: "5" }}>
-          <Flex borderBottom={"1px solid grey"} p={"10px"} align={"center"}>
+          <Flex borderBottom={"1px solid grey"} p={"10px"} align={"center"} backgroundColor={'white'} pos={{base:"fixed", lg:'relative',xl:'relative'}} zIndex={5} width="100%" >
             <Box
               display={{ base: "flex", md: "flex", lg: "none", xl: "none" }}
               mr={"0px"}
@@ -218,10 +226,11 @@ export default function StudentLayout() {
                     setDisplay("none");
                   }
                 }}
+                size={20}
               />
             </Box>
 
-            <Box ml={{ base: "10px", lg: "20px", xl: "25px" }}>
+            <Box ml={{ base: "10px", lg: "20px", xl: "25px" }} w={{base:'10%', xl:'5%'}}>
               <img src={logo} alt="logo" />
             </Box>
             <Spacer />

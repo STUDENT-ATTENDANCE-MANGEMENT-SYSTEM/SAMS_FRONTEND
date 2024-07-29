@@ -36,6 +36,7 @@
     "nigerian-institutions": "^1.0.3",
     "react": "^18.2.0",
     "react-bootstrap-typeahead": "^6.3.2",
+    "react-calendar": "^5.0.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.11.0",

@@ -284,6 +284,7 @@ export default function LecturerLogin() {
               color={"red"}
               fontSize={{ base: ".6rem", lg: ".9rem", xl: ".9rem" }}
               fontFamily={'body'}
+              cursor={'pointer'}
             >
               Signin
             </Text>

@@ -116,6 +116,21 @@ export default function LecturerLayout() {
   } = useDisclosure();
 
   const initialRef = useRef(null);
+
+  const timeTable = () =>{
+    navigate(`/lecturer/${lecturerId}/timetable`)
+    setDisplay("none")
+  }
+
+  const insight = () =>{
+    navigate(`/lecturer/${lecturerId}/insight`)
+    setDisplay("none")
+  }
+
+  const home = () =>{
+    navigate(`/lecturer/${lecturerId}`)
+    setDisplay("none")
+  }
   
 
   return (
@@ -217,16 +232,16 @@ export default function LecturerLayout() {
             <Flex justify={"center"}>
               <List spacing={10} mt={"70px"} cursor={"pointer"}>
                 <Link to={`/lecturer/${lecturerId}`}>
-                  <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2} color={location.pathname === `/lecturer/${lecturerId}` ? "red" : "initial"}>
+                  <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2} onClick={home} color={location.pathname === `/lecturer/${lecturerId}` ? "red" : "initial"}>
                     <ListIcon as={MdHome} boxSize={5} />
                     Home
                   </ListItem>
                 </Link>       
-                  <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
+                  <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2} onClick={timeTable} color={location.pathname === `/lecturer/${lecturerId}/timetable` ? "red" : "initial"}>
                       <ListIcon as={MdGridOn} boxSize={5} />
                           Timetable
                   </ListItem>
-                  <ListItem fontWeight={"bold"} cursor={"pointer"}  pl={2}>
+                  <ListItem fontWeight={"bold"} cursor={"pointer"}  onClick={insight} color={location.pathname === `/lecturer/${lecturerId}/insight` ? "red" : "initial"} pl={2}>
                     <ListIcon as={MdAnalytics} boxSize={5} />
                         Insight
                   </ListItem>
@@ -270,18 +285,18 @@ export default function LecturerLayout() {
             <Flex justify={"center"}>
               <List spacing={10} mt={"70px"} cursor={"pointer"}>
                 <Link to={"/"}>
-                  <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2} color={location.pathname === `/lecturer/${lecturerId}` ? "red" : "initial"}>
+                  <ListItem fontWeight={"bold"} cursor={"pointer"} onClick={home} pl={2} color={location.pathname === `/lecturer/${lecturerId}` ? "red" : "initial"}>
                     <ListIcon as={MdHome} boxSize={5} />
                     Home
                   </ListItem>
                 </Link>
               
-                  <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
+                  <ListItem fontWeight={"bold"} cursor={"pointer"} onClick={timeTable} color={location.pathname === `/lecturer/${lecturerId}/timetable` ? "red" : "initial"} pl={2}>
                       <ListIcon as={MdGridOn} boxSize={5} />
                           Timetable
                         </ListItem>
                
-                        <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2}>
+                        <ListItem fontWeight={"bold"} cursor={"pointer"} onClick={insight} color={location.pathname === `/lecturer/${lecturerId}/insight` ? "red" : "initial"} pl={2}>
                           <ListIcon as={MdAnalytics} boxSize={5} />
                           Insight
                         </ListItem>
@@ -305,7 +320,7 @@ export default function LecturerLayout() {
           </GridItem>
         </Box>
         <GridItem as={"main"} colSpan={{ base: "6", lg: "5", xl: "5" }}>
-          <Flex borderBottom={"1px solid grey"} p={"10px"} align={"center"} backgroundColor={'white'} pos={{base:"fixed", lg:'relative',xl:'relative'}} zIndex={5} width="100%" >
+          <Flex borderBottom={"1px solid grey"} p={"10px"} align={"center"} backgroundColor={'white'} pos={"fixed"} zIndex={5} width="100%" >
             <Box
               display={{ base: "flex", md: "flex", lg: "none", xl: "none" }}
               //mr={{ base: "10px" }}
@@ -332,7 +347,7 @@ export default function LecturerLayout() {
             <Flex
               align={"center"}
               gap={{ base: 3, lg: 10, xl: 10 }}
-              mr={{ base: "10px", md: "50px", lg: "130px", xl: "150px" }}
+              mr={{ base: "10px", md: "50px", lg: "330px", xl: "350px" }}
             >
               
               <Menu>
