@@ -128,10 +128,10 @@ import {
               columns={{ base: "1", lg: "3", xl: "3" }}
               mb={"2rem"}
               mx={"20px"}
-              mt={"30px"}
+              mt={{base:'5em',lg:'7em',xl:'7em'}}
               overflow={"hidden"}
               pos={"relative"}
-              gap={3}
+              gap={5}
             >
               {currentItems &&
                 currentItems.map((id, index) => {
@@ -139,7 +139,7 @@ import {
   
                   return (
                     <div key={index}>
-                      <Card variant={"outline"} mt={'5em'}  boxShadow={'lg'} onClick={() => handleClick(id)}>
+                      <Card variant={"outline"}   boxShadow={'lg'} onClick={() => handleClick(id)}>
                         <CardHeader>
                           <Flex>
                             <Heading fontSize={{base:"1.5rem",md:"2rem",lg:"2rem",xl:"2rem"}} pl={"10px"} mt={"15px"}>
@@ -159,17 +159,6 @@ import {
                             
   
                             <IconButton
-                              onClick={() => {
-                                
-                                toast({
-                                  position: "top-right",
-                                  title: "Attendance Code Copied",
-                                  description: `The attendance code ${course.attendanceCode} has been copied to your clipboard. Do well to send it to your students.`,
-                                  status: "success",
-                                  duration: 10000,
-                                  isClosable: true,
-                                });
-                              }}
                               variant={"ghost"}
                               size={"lg"}
                               icon={<MdOutlineEqualizer />}

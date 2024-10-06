@@ -223,6 +223,8 @@ export default function LecturerLayout() {
             colSpan={{ base: "0", lg: "2", xl: "1" }}
             minHeight={"100vh"}
             borderRight={"2px solid black"}
+            position="fixed" 
+            width={{ lg: "16.6667%", xl: "16.6667%" }}
           >
             <Flex mt={"40px"} ml={"10px"}>
               <Text fontWeight={"extrabold"} fontSize={"2xl"}>
@@ -231,12 +233,10 @@ export default function LecturerLayout() {
             </Flex>
             <Flex justify={"center"}>
               <List spacing={10} mt={"70px"} cursor={"pointer"}>
-                <Link to={`/lecturer/${lecturerId}`}>
                   <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2} onClick={home} color={location.pathname === `/lecturer/${lecturerId}` ? "red" : "initial"}>
                     <ListIcon as={MdHome} boxSize={5} />
                     Home
-                  </ListItem>
-                </Link>       
+                  </ListItem>    
                   <ListItem fontWeight={"bold"} cursor={"pointer"} pl={2} onClick={timeTable} color={location.pathname === `/lecturer/${lecturerId}/timetable` ? "red" : "initial"}>
                       <ListIcon as={MdGridOn} boxSize={5} />
                           Timetable
@@ -284,12 +284,10 @@ export default function LecturerLayout() {
             
             <Flex justify={"center"}>
               <List spacing={10} mt={"70px"} cursor={"pointer"}>
-                <Link to={"/"}>
                   <ListItem fontWeight={"bold"} cursor={"pointer"} onClick={home} pl={2} color={location.pathname === `/lecturer/${lecturerId}` ? "red" : "initial"}>
                     <ListIcon as={MdHome} boxSize={5} />
                     Home
                   </ListItem>
-                </Link>
               
                   <ListItem fontWeight={"bold"} cursor={"pointer"} onClick={timeTable} color={location.pathname === `/lecturer/${lecturerId}/timetable` ? "red" : "initial"} pl={2}>
                       <ListIcon as={MdGridOn} boxSize={5} />

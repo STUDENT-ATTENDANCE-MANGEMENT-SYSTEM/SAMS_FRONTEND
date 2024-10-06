@@ -61,8 +61,8 @@ export default function AttendanceList() {
             columns={{ base: "1", lg: "3", xl: "3" }}
             mb={"2rem"}
             mx={"20px"}
-            gap={"3"}
-            mt={"30px"}
+            gap={"5"}
+            mt={{base:'5em',lg:'7em',xl:'7em'}}
           >
             {attendances &&
               attendances.ids
@@ -73,7 +73,7 @@ export default function AttendanceList() {
 
                 return (
                   <div key={index}>
-                    <Card variant={"outline"} boxShadow={'lg'} mt={'5em'} >
+                    <Card variant={"outline"} boxShadow={'lg'} >
                       <CardHeader>
                         <Flex>
                           <Heading fontSize={{base:'1.6rem',md:'1.8rem',lg:"2rem"}} pl={"10px"}>
